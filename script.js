@@ -2,8 +2,8 @@ const inquirer = require('inquirer');
 
 // function for getting user input
 
-const getUserInput = () => {
-    inquirer.prompt([
+const getUserInput = async () => {
+    let userAnswers = await inquirer.prompt([
         {
             type : 'input',
             message : 'title: ',
@@ -46,7 +46,7 @@ const getUserInput = () => {
             type : 'input',
             message : 'your name as you want it to appear in the license: ',
             name : 'authorName'
-        }
+        },
         {
             type : 'input',
             message : 'github username: ',
@@ -58,7 +58,9 @@ const getUserInput = () => {
             name : 'toc',
             default : false
         }
-    ])
+    ]);
+
+    return userAnswers;
 }
 
 // function for saving data to a readme.md file
