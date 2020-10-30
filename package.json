@@ -1,0 +1,22 @@
+{
+  "name": "readme-generator",
+  "version": "1.0.0",
+  "description": "Builds good readme.md files for GitHub repositories.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtorcellini/readme-gen.git"
+  },
+  "author": "Matt Torcellini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtorcellini/readme-gen/issues"
+  },
+  "homepage": "https://github.com/mtorcellini/readme-gen#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
