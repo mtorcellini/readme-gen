@@ -80,7 +80,17 @@ const formatText = (data) => {
 
     let text = `# ${data.title}\n`
     text += `## Description\n\n${data.description}\n\n`;
+
     // if toc, make toc here
+    if (data.toc) {
+        text += '## Table of Contents\n'
+        text += data.installation ? '- [Installation](#installation)\n' : '';
+        text += '- [Usage](#usage)\n';
+        text += '- [License](#license)\n';
+        text += data.contribution ? '- [Contribution Guidelines](#contribution-guidelines)\n' : '';
+        text += data.tests ? '- [Tests](#tests)\n\n' : '';
+    }
+
     text += data.installation ? `## Installation\n\n${data.installation}\n\n` : '';
     text += `## Usage\n\n${data.usage}\n\n`;
     text += `## License\n\n${licenseText}\n\n`
