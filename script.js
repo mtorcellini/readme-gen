@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 
 // function for getting user input
 
@@ -64,5 +65,22 @@ const getUserInput = async () => {
 }
 
 // function for saving data to a readme.md file
+const makeFile = (data) => {
 
-getUserInput();
+    let fileText = 'this is a test';
+    
+    fs.writeFile('./output/readme.md', fileText, (err) => {
+        if (err) throw err;
+    });
+    
+
+}
+
+const init = async () => {
+    let userData = await getUserInput();
+    console.log('userData: ' + userData); 
+    makeFile(userData);
+
+}
+
+init();
