@@ -1,7 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// function for getting user input
+const init = async () => {
+    let userAnswers = await getUserInput();
+    let formattedText = formatText(userAnswers);
+    makeFile(formattedText);
+}
 
 const getUserInput = async () => {
     let userAnswers = await inquirer.prompt([
@@ -18,7 +22,7 @@ const getUserInput = async () => {
         {
             name : 'input',
             message : 'installation instructions: ',
-            name : 'installation'
+            name : 'installation',
         },
         {
             type : 'input',
@@ -65,22 +69,25 @@ const getUserInput = async () => {
 }
 
 // function for saving data to a readme.md file
-const makeFile = (data) => {
-
-    let fileText = 'this is a test';
-    
+const makeFile = (fileText) => {
     fs.writeFile('./output/readme.md', fileText, (err) => {
         if (err) throw err;
     });
-    
-
 }
 
-const init = async () => {
-    let userData = await getUserInput();
-    console.log('userData: ' + userData); 
-    makeFile(userData);
+const formatText = (data) => {
+    let licenseText = 'sample license text';
 
+    let text = `# ${data.title}\n`
+    text += `## Description\n\n${data.description}\n\n`;
+    // if toc, make toc here
+    text += data.installation ? `## Installation\n\n${data.installation}\n\n` : '';
+    text += `## Usage\n\n${data.usage}\n\n`;
+    text += `## License\n\n${licenseText}\n\n`
+    text += data.contribution ? `## Contribution Guidelines\n\n${data.contribution}\n\n` : '';
+    text += data.tests ? `## Tests\n\n${data.tests}\n\n` : '';
+
+    return text;
 }
 
 init();
