@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const licenses = require('./licenses.js');
 
 const init = async () => {
     let userAnswers = await getUserInput();
@@ -76,7 +77,7 @@ const makeFile = (fileText) => {
 }
 
 const formatText = (data) => {
-    let licenseText = 'sample license text';
+    let licenseText = '';
 
     let text = `# ${data.title}\n`
     text += `## Description\n\n${data.description}\n\n`;
@@ -93,6 +94,20 @@ const formatText = (data) => {
 
     text += data.installation ? `## Installation\n\n${data.installation}\n\n` : '';
     text += `## Usage\n\n${data.usage}\n\n`;
+
+
+    switch(data.license) {
+        case 'ISC':
+            licenseText = licenses.useISC(data.authorName, '2020');
+            break;
+        case 'MIT':
+            licenseText = licenses.useMIT(data.authorName, '2020');
+            break;
+        case 'GNU':
+            licenseText = licenses.useGNU();
+            break;
+    }
+
     text += `## License\n\n${licenseText}\n\n`
     text += data.contribution ? `## Contribution Guidelines\n\n${data.contribution}\n\n` : '';
     text += data.tests ? `## Tests\n\n${data.tests}\n\n` : '';
